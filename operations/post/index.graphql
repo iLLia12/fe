@@ -1,0 +1,10 @@
+fragment PostProperties on Post {
+    id
+    title
+    body
+    user {
+        id
+        firstName
+        lastName
+    }
+}

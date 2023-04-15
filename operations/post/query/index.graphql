@@ -1,0 +1,7 @@
+# import "../index.graphql"
+
+query GetAllPosts {
+    posts {
+        ...PostProperties
+    }
+}

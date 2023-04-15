@@ -1,0 +1,43 @@
+#import "../index.graphql"
+
+mutation StoreUser(
+    $firstName: String!
+    $lastName: String!
+    $username: String!
+    $email: String!
+) {
+    storeUser(
+        newUserData: {
+            firstName: $firstName
+            lastName: $lastName
+            username: $username
+            email: $email
+        }
+    ) {
+        ...UserAllProperties
+    }
+}
+
+mutation UpdateUser(
+    $id: String!
+    $firstName: String
+    $lastName: String
+    $username: String
+    $email: String
+) {
+    updateUser(
+        userData: {
+            id: $id
+            firstName: $firstName
+            lastName: $lastName
+            username: $username
+            email: $email
+        }
+    ) {
+        ...UserAllProperties
+    }
+}
+
+mutation RemoveUser($id: String!) {
+    removeUser(id: $id)
+}

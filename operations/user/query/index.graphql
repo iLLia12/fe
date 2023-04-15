@@ -1,0 +1,19 @@
+#import "../index.graphql"
+
+query Users {
+    users {
+        ...UserBasicProperties
+    }
+}
+
+query UsersFullInfo {
+    users {
+        ...UserAllProperties
+    }
+}
+
+query UserFullInfo($id: String!) {
+    user(id: $id) {
+        ...UserAllProperties
+    }
+}

@@ -1,0 +1,16 @@
+#import "../posts/index.graphql"
+
+fragment UserBasicProperties on UserEntity {
+    id
+    firstName
+    lastName
+}
+
+fragment UserAllProperties on UserEntity {
+    ...UserBasicProperties
+    username
+    email
+    posts {
+        ...PostProperties
+    }
+}

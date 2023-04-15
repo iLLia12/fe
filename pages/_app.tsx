@@ -4,6 +4,10 @@ import type { NextPage } from 'next';
 import { Session } from 'next-auth';
 import { AppProps } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
+import { Provider } from 'react-redux';
+import { ApolloProvider } from '@apollo/client';
+import apolloClient from '@/services/apollo-client';
+import { wrapper } from '@/store';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -20,10 +24,13 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
-  //console.log('session: ', session);
+  const { store, props } = wrapper.useWrappedStore(pageProps);
+
   return (
     <SessionProvider session={session}>
-      {getLayout(<Component {...pageProps} />)}
+      <ApolloProvider client={apolloClient}>
+        <Provider store={store}>{getLayout(<Component {...props} />)}</Provider>
+      </ApolloProvider>
     </SessionProvider>
   );
 }

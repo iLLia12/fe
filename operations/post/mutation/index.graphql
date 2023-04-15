@@ -1,0 +1,7 @@
+#import "../index.graphql"
+
+mutation CreatePost ($title: String!, $body: String!, $isActive: Boolean!) {
+    storePost(newPostData: {title: $title, body: $body, isActive: $isActive}) {
+        ...PostProperties
+    }
+}
